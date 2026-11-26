@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090d18">
+  <title>Ardy AI Video Studio</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div class="brand-mark">A</div>
+      <div><p class="eyebrow">AI CREATIVE WORKSPACE</p><h1>ARDY <span>AI VIDEO STUDIO</span></h1></div>
+      <div class="live"><i></i> FAL AI</div>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">IMAGE → VIDEO</p>
+      <h2>Hidupkan foto<br><em>jadi cerita bergerak.</em></h2>
+      <p>Unggah foto, tulis gerakan yang diinginkan, pilih rasio, lalu buat video AI.</p>
+    </section>
+
+    <form id="studioForm">
+      <section class="panel">
+        <div class="section-head"><span class="step">01</span><div><h3>Foto sumber</h3><p>JPG, PNG, atau WebP · Maksimal 15 MB</p></div></div>
+        <label class="dropzone" id="dropzone" for="imageInput">
+          <input id="imageInput" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
+          <img id="preview" alt="Pratinjau foto" hidden>
+          <div id="uploadHint"><div class="upload-icon">＋</div><strong>Pilih foto dari galeri</strong><small>Pilih foto dari galeri atau gunakan tombol kamera</small></div>
+        </label>
+        <div class="upload-actions">
+          <button type="button" class="secondary-action" id="cameraBtn">▣ Ambil foto dengan kamera</button>
+          <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
+        </div>
+        <div class="fit-row">
+          <span>Penyesuaian foto</span>
+          <label><input type="radio" name="fit" value="cover" checked> Isi penuh</label>
+          <label><input type="radio" name="fit" value="contain"> Tanpa potong</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head"><span class="step">02</span><div><h3>Aspek rasio</h3><p>Pilih format sesuai platform tujuan</p></div></div>
+        <div class="ratio-grid" id="ratioGrid">
+          <button type="button" class="ratio active" data-ratio="9:16"><b class="shape r916"></b><strong>9:16</strong><small>Shorts / Reels</small></button>
+          <button type="button" class="ratio" data-ratio="16:9"><b class="shape r169"></b><strong>16:9</strong><small>YouTube</small></button>
+          <button type="button" class="ratio" data-ratio="1:1"><b class="shape r11"></b><strong>1:1</strong><small>Square</small></button>
+          <button type="button" class="ratio" data-ratio="4:5"><b class="shape r45"></b><strong>4:5</strong><small>Instagram</small></button>
+          <button type="button" class="ratio" data-ratio="3:4"><b class="shape r34"></b><strong>3:4</strong><small>Portrait</small></button>
+          <button type="button" class="ratio" data-ratio="4:3"><b class="shape r43"></b><strong>4:3</strong><small>Klasik</small></button>
+          <button type="button" class="ratio" data-ratio="21:9"><b class="shape r219"></b><strong>21:9</strong><small>Ultrawide</small></button>
+          <button type="button" class="ratio" data-ratio="2.35:1"><b class="shape r235"></b><strong>2.35:1</strong><small>Film</small></button>
+        </div>
+        <input type="hidden" id="ratio" name="ratio" value="9:16">
+        <div class="ratio-preview"><span>Format terpilih</span><strong id="ratioLabel">9:16 · Vertikal</strong></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head"><span class="step">03</span><div><h3>Prompt gerakan</h3><p>Jelaskan apa yang harus terjadi di video</p></div></div>
+        <textarea id="prompt" name="prompt" rows="5" maxlength="1800" placeholder="Contoh: Subjek berjalan perlahan ke arah kamera, kain dan rambut bergerak tertiup angin, kamera melakukan slow dolly-in, pencahayaan sinematik realistis..." required></textarea>
+        <div class="prompt-tools">
+          <button type="button" class="chip" data-prompt="Gerakan natural dan realistis, subjek tetap mempertahankan wajah dan penampilan asli, kamera perlahan melakukan dolly-in, pencahayaan sinematik, detail tajam.">Cinematic</button>
+          <button type="button" class="chip" data-prompt="Subjek berjalan perlahan dengan gerakan tubuh alami, kamera tracking mengikuti dari depan, lingkungan bergerak halus, realistis.">Berjalan</button>
+          <button type="button" class="chip" data-prompt="Subjek melakukan gerakan dinamis yang terkoordinasi dan alami, kamera mengikuti gerakan dengan halus, pencahayaan sinematik, detail realistis.">Gerakan dinamis</button>
+          <button type="button" class="chip" data-prompt="Angin menggerakkan pakaian dan dedaunan, kamera orbit perlahan, suasana dramatis dengan cahaya matahari lembut, fotorealistis.">Alam</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head"><span class="step">04</span><div><h3>Pengaturan video</h3><p>Atur durasi dan resolusi keluaran</p></div></div>
+        <div class="settings">
+          <label>Durasi
+            <select id="duration" name="duration">
+              <option value="5">5 detik</option><option value="6">6 detik</option>
+              <option value="8">8 detik</option><option value="10">10 detik</option>
+              <option value="12">12 detik</option><option value="15">15 detik</option>
+            </select>
+          </label>
+          <label>Resolusi
+            <select id="resolution" name="resolution">
+              <option value="480P">480P</option><option value="768P" selected>768P</option>
+              <option value="1080P">1080P</option>
+            </select>
+          </label>
+        </div>
+        <p class="hint">Durasi pilihan: 5–15 detik. Resolusi tersedia sesuai dukungan model dan penggunaan kredit fal.ai.</p>
+      </section>
+
+      <button class="generate" id="generateBtn" type="submit"><span>✦</span> BUAT VIDEO AI <b>→</b></button>
+    </form>
+
+    <section class="panel result" id="resultPanel" hidden>
+      <div class="section-head"><span class="step">05</span><div><h3>Hasil video</h3><p id="statusText">Menyiapkan video...</p></div></div>
+      <div class="progress"><i id="progressBar"></i></div>
+      <video id="videoResult" controls playsinline hidden></video>
+      <a id="downloadLink" class="download" hidden download="ardy-ai-video.mp4">Unduh video</a>
+    </section>
+
+    <footer>ARDY AI VIDEO STUDIO <span>Powered by fal.ai</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
